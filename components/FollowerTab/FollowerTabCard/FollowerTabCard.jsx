@@ -6,6 +6,7 @@ import { TiTick } from 'react-icons/ti'
 //INTERNAL IMPORT
 import Style from './FollowerTabCard.module.css'
 import images from '../../../img'
+
 const FollowerTabCard = ({ i, el }) => {
   const [following, setFollowing] = useState(false)
 
@@ -42,7 +43,7 @@ const FollowerTabCard = ({ i, el }) => {
             alt='profile picture'
             width={50}
             height={50}
-            src={el.vineyard || images[`user${i + 1}`]}
+            src={el.vineyard || images.user1}
           />
         </div>
 

@@ -9,27 +9,27 @@ import images from '../../img'
 const Category = () => {
   const CategoryArray = [
     {
-      images: images.creatorbackground6,
+      images: images.domain1,
       name: 'Pauillac',
     },
     {
-      images: images.creatorbackground5,
+      images: images.domain3,
       name: 'St-Estèphe',
     },
     {
-      images: images.creatorbackground3,
+      images: images.domain2,
       name: 'St-Emilion ',
     },
     {
-      images: images.creatorbackground4,
+      images: images.domain1,
       name: 'St-Julien',
     },
     {
-      images: images.creatorbackground5,
+      images: images.domain3,
       name: 'Margaux',
     },
     {
-      images: images.creatorbackground3,
+      images: images.domain2,
       name: 'Mouton',
     },
   ]

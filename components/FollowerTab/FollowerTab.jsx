@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {
-  RiUserFollowFill,
-  RiUserUnfollowFill,
-  RiAwardLine,
-} from 'react-icons/ri'
+import { RiUserFollowFill, RiAwardLine } from 'react-icons/ri'
 
 //INTERNAL IMPORT
 import Style from './FollowerTab.module.css'
@@ -11,106 +7,71 @@ import FollowerTabCard from './FollowerTabCard/FollowerTabCard'
 import images from '../../img'
 
 const FollowerTab = ({ TopCreator }) => {
-  // const CardArray = [
-  //   {
-  //     background: images.member1,
-  //     user: images.user1,
-  //   },
-  //   {
-  //     background: images.member2,
-  //     user: images.user2,
-  //   },
-  //   {
-  //     background: images.member3,
-  //     user: images.user3,
-  //   },
-  //   {
-  //     background: images.member4,
-  //     user: images.user4,
-  //   },
-  //   {
-  //     background: images.member5,
-  //     user: images.user5,
-  //   },
-  //   {
-  //     background: images.member6,
-  //     user: images.user6,
-  //   },
-  //   {
-  //     background: images.member7,
-  //     user: images.user7,
-  //   },
-  //   {
-  //     background: images.member8,
-  //     user: images.user8,
-  //   },
-  // ];
   const FollowingArray = [
     {
-      background: images.member1,
-      user: images.user3,
+      background: images.member, // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member2,
-      user: images.user4,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member10,
-      user: images.user5,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member8,
-      user: images.user6,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member9,
-      user: images.user1,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member7,
-      user: images.user2,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
   ]
   const NewsArray = [
     {
-      background: images.member1,
-      user: images.user1,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member2,
-      user: images.user2,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member7,
-      user: images.user3,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member8,
-      user: images.user4,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member9,
-      user: images.user5,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member10,
-      user: images.user6,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
     {
-      background: images.member11,
-      user: images.user7,
+      background: images.member,
+      // user: images.user1,
       seller: '0x720...93u',
     },
   ]

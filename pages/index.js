@@ -10,37 +10,37 @@ import {HeroSection, OurServices, BigNFTSilder, Subscribe, Title, Category, Filt
 const Home = () => {
     const nfts = [
         {
-          image: images.nft_image_4,
+          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
           name: "Saint Emilion",
           tokenId: "15432",
           price: "0.1 ETH",
         },
         {
-          image: images.nft_image_4,
+          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
           name: "Saint Emilion",
           tokenId: "15432",
           price: "0.1 ETH",
         },
         {
-          image: images.nft_image_4,
+          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
           name: "Saint Emilion",
           tokenId: "15432",
           price: "0.1 ETH",
         },
         {
-          image: images.nft_image_4,
+          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
           name: "Saint Emilion",
           tokenId: "15432",
           price: "0.1 ETH",
         },
         {
-          image: images.nft_image_4,
+          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
           name: "Saint Emilion",
           tokenId: "15432",
           price: "0.1 ETH",
         },
         {
-          image: images.nft_image_4,
+          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
           name: "Saint Emilion",
           tokenId: "15432",
           price: "0.1 ETH",
@@ -48,23 +48,19 @@ const Home = () => {
     ]
     const vineyards = [
       {
-        background: images.member1,
-        user: images.user3,
+        background: images.member,
+        seller: '0x720...83u',
+      },
+      {
+        background: images.member,
         seller: '0x720...93u',
       },
       {
-        background: images.member2,
-        user: images.user4,
+        background: images.member,
         seller: '0x720...93u',
       },
       {
-        background: images.member10,
-        user: images.user5,
-        seller: '0x720...93u',
-      },
-      {
-        background: images.member7,
-        user: images.user2,
+        background: images.member,
         seller: '0x720...93u',
       },
     ]

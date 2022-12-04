@@ -10,7 +10,7 @@ const OurServices = () => {
       <div className={Style.service_box}>
         <div className={Style.service_box_item}>
           <Image
-            src={images.service1}
+            src={images.service}
             alt='Filter & Discover'
             width={100}
             height={100}
@@ -26,7 +26,7 @@ const OurServices = () => {
         </div>
         <div className={Style.service_box_item}>
           <Image
-            src={images.service2}
+            src={images.service}
             alt='Filter & Discover'
             width={100}
             height={100}
@@ -42,7 +42,7 @@ const OurServices = () => {
         </div>
         <div className={Style.service_box_item}>
           <Image
-            src={images.service3}
+            src={images.service}
             alt='Connect Wallet'
             width={100}
             height={100}
@@ -58,7 +58,7 @@ const OurServices = () => {
         </div>
         <div className={Style.service_box_item}>
           <Image
-            src={images.service1}
+            src={images.service}
             alt='Filter & Discover'
             width={100}
             height={100}

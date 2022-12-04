@@ -10,28 +10,28 @@ import images from '../../img'
 const Slider = () => {
   const Domains = [
     {
-      background: images.creatorbackground3,
-      user: images.user3,
-    },
-    {
-      background: images.creatorbackground4,
-      user: images.user4,
-    },
-    {
-      background: images.creatorbackground5,
-      user: images.user5,
-    },
-    {
-      background: images.creatorbackground6,
-      user: images.user6,
-    },
-    {
-      background: images.creatorbackground3,
+      background: images.domain1,
       user: images.user1,
     },
     {
-      background: images.creatorbackground5,
-      user: images.user2,
+      background: images.domain3,
+      user: images.user1,
+    },
+    {
+      background: images.domain2,
+      user: images.user1,
+    },
+    {
+      background: images.domain1,
+      user: images.user1,
+    },
+    {
+      background: images.domain3,
+      user: images.user1,
+    },
+    {
+      background: images.domain2,
+      user: images.user1,
     },
   ]
   const [width, setWidth] = useState(0)

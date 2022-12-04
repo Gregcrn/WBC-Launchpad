@@ -21,7 +21,8 @@ const BigNFTSilder = () => {
       price: '00664 ETH',
       like: 243,
       image: images.user1,
-      nftImage: images.nft_image_1,
+      nftImage:
+        'https://i.seadn.io/gae/pn2jfYDoAKoeilhiUZwHmsCa3GPj7Tz8DfSxmFHhP0gZiXSAxb-lHEpB92TVcp_SyGUcW5ve6QFeC4IVKRakIu7tEoKiPgPt40r99w?auto=format&w=1000',
       time: {
         days: 21,
         hours: 40,
@@ -36,8 +37,9 @@ const BigNFTSilder = () => {
       collection: 'Margaux Bitcoin La Cuvée',
       price: '0000004 ETH',
       like: 243,
-      image: images.user2,
-      nftImage: images.nft_image_2,
+      image: images.user1,
+      nftImage:
+        'https://i.seadn.io/gae/INCeRPeSI1f4LWYC2LZszkFhrCjla8ReVfh7MSAz8k8wH3dLse0ObMhahTLpqKbAUk9LWgxYlrh09Je6Y3uNY-0hOyir9dmTnkh-?auto=format&w=1000',
       time: {
         days: 77,
         hours: 11,
@@ -52,8 +54,9 @@ const BigNFTSilder = () => {
       collection: 'Pessac-Leognan',
       price: '0000064 ETH',
       like: 243,
-      image: images.user3,
-      nftImage: images.nft_image_3,
+      image: images.user1,
+      nftImage:
+        'https://i.seadn.io/gae/e2-dSR9TlgbXy1dAUQVOEwfy6BHI5dWuntA_CCGmX2PdIsBqcSMwJSD-SKmi2_q_9hGjmK1oX2ORsCMkHRReDjWwFTUArhFH3y_sFA?auto=format&w=384',
       time: {
         days: 37,
         hours: 20,
@@ -68,8 +71,9 @@ const BigNFTSilder = () => {
       collection: 'Saint-Émilion Grand Cru',
       price: '4664 ETH',
       like: 243,
-      image: images.user4,
-      nftImage: images.nft_image_1,
+      image: images.user1,
+      nftImage:
+        'https://i.seadn.io/gae/tRdCKdZvjVRCcFDRlkGMQo2xCAwzqY2VZUY54qysL9oTtT7_D5QlTnvOQWutijxo5jVytA4DmL9DaDL_ezaxLduRuKBrRuKadcUBdlM?auto=format&w=384',
       time: {
         days: 87,
         hours: 29,
