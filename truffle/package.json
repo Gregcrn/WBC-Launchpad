@@ -1,14 +1,12 @@
 {
     "name": "truffle",
     "version": "1.0.0",
-    "description": "Smart contract development framework to make a NFT marketplace",
+    "description": "Truffle project with ERC721 contract",
     "main": "truffle-config.js",
     "dependencies": {
         "@openzeppelin/contracts": "^4.8.0",
-        "@truffle/hdwallet-provider": "^2.1.2",
-        "dotenv": "^16.0.3",
-        "keccak256": "^1.0.6",
-        "merkletreejs": "^0.3.9"
+        "@truffle/hdwallet-provider": "^2.0.10",
+        "dotenv": "^16.0.3"
     },
     "scripts": {
         "test": "truffle test"

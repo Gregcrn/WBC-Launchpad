@@ -1,0 +1,3 @@
+const baseURI = "ipfs://QmdgFwpHA8SQK4mH6cwW4TvBhiZqQ2RNbmFrYDUg9pqrMj/hidden"
+
+const revealedURI = "ipfs://bafybeidtu2h3g6ynef6nkjieo6rtybdzga4sz2c6uh64en6m45vxzpgeyq/"

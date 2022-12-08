@@ -13,8 +13,6 @@ import { Discover, HelpCenter, Notification, Profile, SideBar } from './index'
 import { Button, Error } from '../index'
 import images from '../../img'
 
-//IMPORT FROM SMART CONTRACT
-// import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
 const NavBar = () => {
   //----USESTATE COMPONNTS
@@ -76,10 +74,7 @@ const NavBar = () => {
     }
   }
 
-  //SMART CONTRACT SECTION
-  // const { currentAccount, connectWallet, openError } = useContext(
-  //   NFTMarketplaceContext
-  // );
+
 
   return (
     <div className={Style.navbar}>
@@ -100,7 +95,7 @@ const NavBar = () => {
                 placeholder='Search NFT'
               />
               <BsSearch
-                onClick={() => {}}
+                onClick={() => { }}
                 className={Style.search_icon}
               />
             </div>
@@ -145,7 +140,7 @@ const NavBar = () => {
               svg
               btnName='Connect'
               handleClick={() => connectWallet()}
-              // icon={images}
+            // icon={images}
             />
             {/* ) : ( */}
             {/* <Button

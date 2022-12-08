@@ -6,12 +6,12 @@ import { useRouter } from 'next/router'
 import Style from './HeroSection.module.css'
 import { Button } from '../index'
 import images from '../../img'
+import { SiEthereum } from 'react-icons/si'
+import { shortenAddress } from '../../utils/shortenAddress';
 
-//SMART CONTRACT IMPORT
-// import { NFTMarketplaceContext } from '../../Context/NFTMarketplaceContext'
 
-const HeroSection = () => {
-  // const { titleData } = useContext(NFTMarketplaceContext)
+
+const HeroSection = ({ currentAccount }) => {
   const titleData = 'WBC Launchpad'
   const router = useRouter()
   return (
@@ -25,8 +25,14 @@ const HeroSection = () => {
           </p>
           <Button
             btnName='Register on the WhiteList'
-            handleClick={() => router.push('/searchPage')}
+            handleClick={() => router.push('/mint')}
           />
+          <div className={Style.panel}>
+            <div className={Style.cardFront}>
+              <SiEthereum className={Style.cardIcon} />
+              {currentAccount && <div className={Style.cardNumber}>{shortenAddress(currentAccount)}</div>}
+            </div>
+          </div>
         </div>
         <div className={Style.heroSection_box_right}>
           <Image

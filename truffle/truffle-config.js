@@ -2,8 +2,9 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 require("dotenv").config();
 
 module.exports = {
-  contracts_build_directory: "../artifact",
+  contracts_build_directory: "../contracts",
   networks: {
+
     development: {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 8545,            // Standard Ethereum port (default: none)

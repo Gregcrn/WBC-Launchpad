@@ -1,86 +1,136 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+// Context Ethereum
+import {useEth} from '../context/index';
 //Styles
 import Style from '../styles/index.module.css'
 // Image
 import images from '../img'
 // Components
-import {HeroSection, OurServices, BigNFTSilder, Subscribe, Title, Category, Filter, NFTCard, Loader, FollowerTab, Slider, Brand} from "../components/index"
+import { HeroSection, OurServices, BigNFTSilder, Title, Category, Filter, NFTCard, Loader, FollowerTab, Slider, Brand, AlertWrongNetwork } from "../components/index"
 
+// Data
+const nfts = [
+  {
+    image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
+    name: "Saint Emilion",
+    tokenId: "15432",
+    price: "0.1 ETH",
+  },
+  {
+    image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
+    name: "Saint Emilion",
+    tokenId: "15432",
+    price: "0.1 ETH",
+  },
+  {
+    image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
+    name: "Saint Emilion",
+    tokenId: "15432",
+    price: "0.1 ETH",
+  },
+  {
+    image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
+    name: "Saint Emilion",
+    tokenId: "15432",
+    price: "0.1 ETH",
+  },
+  {
+    image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
+    name: "Saint Emilion",
+    tokenId: "15432",
+    price: "0.1 ETH",
+  },
+  {
+    image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
+    name: "Saint Emilion",
+    tokenId: "15432",
+    price: "0.1 ETH",
+  }
+]
+const vineyards = [
+  {
+    background: images.member,
+    seller: '0x720...83u',
+  },
+  {
+    background: images.member,
+    seller: '0x720...93u',
+  },
+  {
+    background: images.member,
+    seller: '0x720...93u',
+  },
+  {
+    background: images.member,
+    seller: '0x720...93u',
+  },
+]
 
 const Home = () => {
-    const nfts = [
-        {
-          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
-          name: "Saint Emilion",
-          tokenId: "15432",
-          price: "0.1 ETH",
-        },
-        {
-          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
-          name: "Saint Emilion",
-          tokenId: "15432",
-          price: "0.1 ETH",
-        },
-        {
-          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
-          name: "Saint Emilion",
-          tokenId: "15432",
-          price: "0.1 ETH",
-        },
-        {
-          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
-          name: "Saint Emilion",
-          tokenId: "15432",
-          price: "0.1 ETH",
-        },
-        {
-          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
-          name: "Saint Emilion",
-          tokenId: "15432",
-          price: "0.1 ETH",
-        },
-        {
-          image: "https://i.seadn.io/gae/95KBIGR1Lf3mdUeMDALZ4CkqTj7F2XkXG_-Ax0v-m8oJF9dD1K5RQ2LbgMwNG_ZvmSImQkyVN8zxcCx18fZLl6eB-0v6C0hGaGQqCQ?auto=format&w=384",
-          name: "Saint Emilion",
-          tokenId: "15432",
-          price: "0.1 ETH",
+  const {state} = useEth();
+  const {
+    state: { contract, accounts },
+} = useEth();
+
+
+  const [owner, setOwner] = useState(null);
+  const [currentAccount, setCurrentAccount] = useState(null);
+  const [isOwner, setIsOwner] = useState(false);
+
+  // Use effect
+  useEffect(() => {
+    // get owner
+    const getOwner = async () => {
+      if ( accounts && contract) {
+        const owner = await contract.methods.owner().call();
+        setOwner(owner);
+      }
+    };
+    // get current account
+    const getCurrentAccount = async () => {
+      if(accounts && contract) {
+        const currentAccount = accounts[0];
+        setCurrentAccount(currentAccount);
+      }
+    }
+    // check if current account is owner
+    const checkIsOwner = async () => {
+      if(owner && currentAccount) {
+        if(owner === currentAccount) {
+          setIsOwner(true);
+        } else {
+          setIsOwner(false);
         }
-    ]
-    const vineyards = [
-      {
-        background: images.member,
-        seller: '0x720...83u',
-      },
-      {
-        background: images.member,
-        seller: '0x720...93u',
-      },
-      {
-        background: images.member,
-        seller: '0x720...93u',
-      },
-      {
-        background: images.member,
-        seller: '0x720...93u',
-      },
-    ]
+      }
+    }
+
+    getOwner();
+    getCurrentAccount();
+    checkIsOwner();
+
+  }, [contract, accounts, owner, currentAccount]);
+
 
   return (
     <div className={Style.homePage}>
-      <HeroSection />
+      {!state.artifact ? <Loader/> : !state.contract ? (
+        <AlertWrongNetwork/>
+      ):(
+        <>
+      <HeroSection currentAccount={currentAccount} />
       <OurServices />
-      <Title 
+      <Title
         heading="Our last collections "
         paragraph="by designer around the world"
       />
       <BigNFTSilder />
-      <Title 
+      <Title
         heading="Featured NFTs"
         paragraph="Discover our best NFTs on te market"
       />
       <Filter />
       {nfts.length === 0 ? <Loader /> : <NFTCard NFTData={nfts} />}
-      <Title 
+      <Title
         heading="Featured collections"
         paragraph="Discover our best collections on the market"
       />
@@ -88,15 +138,15 @@ const Home = () => {
         <Loader />
       ) : (
         <FollowerTab TopCreator={vineyards} />
-        )} 
-      <Title 
+      )}
+      <Title
         heading="Featured Vineyards"
         paragraph="Discover the latest Vineyards choose by our community"
       />
       <Category />
       <Slider />
-      <Brand />
-      {/* <Subscribe /> */}
+      <Brand /> 
+      </> )}
     </div>
   )
 }
