@@ -7,7 +7,7 @@ import { MintNFT } from '../components/index';
 import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
 // import merkle from merkle.json
-import whiteList from '../merkle/merkle.json';
+import merkle from '../merkle/merkle.json';
 
 const Mint = () => {
     const {
@@ -84,12 +84,12 @@ const Mint = () => {
         };
 
         // get balance of current account
-        // const getBalanceOfAccount = async () => {
-        //     if (contract) {
-        //         const balanceOfAccount = await contract.methods.balanceOf(currentAccount).call();
-        //         setBalanceOfAccount(balanceOfAccount);
-        //     }
-        // };
+        const getBalanceOfAccount = async () => {
+            if (contract, currentAccount) {
+                const balanceOfAccount = await contract.methods.balanceOf(currentAccount).call();
+                setBalanceOfAccount(balanceOfAccount);
+            }
+        };
         
         getOwner();
         getCurrentAccount();
@@ -98,21 +98,27 @@ const Mint = () => {
         getSaleStatus();
         getTotalSupply();
         getPrice();
-        // getBalanceOfAccount();
+        getBalanceOfAccount();
     }, [contract, accounts, owner, currentAccount]);
 
     console.log('balanceOfAccount', balanceOfAccount);
 
     // Merkle
     let whitelist = [];
-    whiteList.map((token) => {
+    merkle.map((token) => {
         whitelist.push(token.address);
     });
 
     const leaves = whitelist.map((address) => keccak256(address));
-    const tree = new MerkleTree(leaves, keccak256, { sort: true });
+    const merkleTree = new MerkleTree(leaves, keccak256, { sort: true });
     const leaf = keccak256(currentAccount);
-    const proof = tree.getHexProof(leaf);
+    const proof = merkleTree.getHexProof(leaf);
+
+    console.log('proof', proof);
+    console.log('merklrRoot', merkleTree.getHexRoot())
+
+    //0xe19a98905d32d5b3fd9ec8a64912a2e028dd62a7ddb83b48d7c7e07bd82beaaf
+    // 0xe19a98905d32d5b3fd9ec8a64912a2e028dd62a7ddb83b48d7c7e07bd82beaaf
 
 
     // mintPresale function

@@ -8,7 +8,7 @@ const keccak256 = require('keccak256');
 const addresses = require('../whitelist/address.json');
 
 let whitelist = [];
-whitelist.map((address) => {
+addresses.map((address) => {
     whitelist.push(address.address)
 });
 
@@ -16,6 +16,7 @@ const leaves = whitelist.map((address) => keccak256(address));
 const merkleTree = new MerkleTree(leaves, keccak256, { sort: true });
 const merkleRoot = merkleTree.getHexRoot();
 
+console.log('merkleRoot', merkleRoot);
 
 
 module.exports = function (deployer) {
