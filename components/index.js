@@ -15,5 +15,6 @@ import Slider from "./Slider/Slider";
 import Brand from "./Brand/Brand";
 import AlertWrongNetwork from "./Alert/AlertWrongNetwork";
 import MintNFT from "./MintNFT/MintNFT";
+import  AdminInterface  from "./AdminInterface/AdminInterface";
 
-export { NavBar, Footer, Button, HeroSection, OurServices, BigNFTSilder, Subscribe, Title, Category, Filter, NFTCard, Loader, FollowerTab, Slider, Brand, AlertWrongNetwork, MintNFT };
+export { NavBar, Footer, Button, HeroSection, OurServices, BigNFTSilder, Subscribe, Title, Category, Filter, NFTCard, Loader, FollowerTab, Slider, Brand, AlertWrongNetwork, MintNFT, AdminInterface };

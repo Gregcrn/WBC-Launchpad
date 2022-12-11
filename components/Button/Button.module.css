@@ -17,3 +17,10 @@
     border:  1px solid var(--icons-color);
     color:  var(--icons-color);
 }
+
+.disabled{
+    background-color: var(--shadow-dark-color);
+    border:  1px solid var(--shadow-dark-color);
+    color:  var(--shadow-light-color);
+    cursor: not-allowed;
+}

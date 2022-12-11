@@ -2,14 +2,24 @@ import React, { useEffect, useState } from 'react';
 // Context Ethereum
 import { useEth } from '../context/index';
 // Components
-import { MintNFT } from '../components/index';
+import {
+    AdminInterface,
+    AlertWrongNetwork,
+    Button,
+    Loader,
+    MintNFT,
+} from '../components/index';
 // import Merkle
 import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
 // import merkle from merkle.json
 import merkle from '../merkle/merkle.json';
+import Link from 'next/link';
+// Success Toast
+import toast, { Toaster } from 'react-hot-toast';
 
 const Mint = () => {
+    const { state } = useEth();
     const {
         state: { contract, accounts },
     } = useEth();
@@ -17,11 +27,12 @@ const Mint = () => {
     const [owner, setOwner] = useState(null);
     const [currentAccount, setCurrentAccount] = useState(null);
     const [isOwner, setIsOwner] = useState(false);
-    const [maxSupply, setMaxSupply] = useState(null);
     const [maxPerAddress, setMaxPerAddress] = useState(null);
     const [saleStatus, setSaleStatus] = useState(null);
     const [price, setPrice] = useState(null);
     const [balanceOfAccount, setBalanceOfAccount] = useState(null);
+    const [totalSupply, setTotalSupply] = useState(null);
+    const [sucessMint, setSucessMint] = useState(false);
 
     // Use effect
     useEffect(() => {
@@ -47,15 +58,6 @@ const Mint = () => {
                 } else {
                     setIsOwner(false);
                 }
-            }
-        };
-        // get TOTAL_SUPPLY
-        const getTotalSupply = async () => {
-            if (contract) {
-                const totalSupply = await contract.methods
-                    .TOTAL_SUPPLY()
-                    .call();
-                setMaxSupply(totalSupply);
             }
         };
 
@@ -85,23 +87,29 @@ const Mint = () => {
 
         // get balance of current account
         const getBalanceOfAccount = async () => {
-            if (contract, currentAccount) {
-                const balanceOfAccount = await contract.methods.balanceOf(currentAccount).call();
+            if ((contract, currentAccount)) {
+                const balanceOfAccount = await contract.methods
+                    .balanceOf(currentAccount)
+                    .call();
                 setBalanceOfAccount(balanceOfAccount);
             }
         };
-        
+        // get Total of Supply
+        const getTotalSupply = async () => {
+            if (contract) {
+                const totalSupply = await contract.methods.MAX_SUPPLY().call();
+                setTotalSupply(totalSupply);
+            }
+        };
         getOwner();
         getCurrentAccount();
         checkIsOwner();
         getMaxPerAddress();
         getSaleStatus();
-        getTotalSupply();
         getPrice();
         getBalanceOfAccount();
+        getTotalSupply();
     }, [contract, accounts, owner, currentAccount]);
-
-    console.log('balanceOfAccount', balanceOfAccount);
 
     // Merkle
     let whitelist = [];
@@ -113,18 +121,11 @@ const Mint = () => {
     const merkleTree = new MerkleTree(leaves, keccak256, { sort: true });
     const leaf = keccak256(currentAccount);
     const proof = merkleTree.getHexProof(leaf);
-
-    console.log('proof', proof);
-    console.log('merklrRoot', merkleTree.getHexRoot())
-
-    //0xe19a98905d32d5b3fd9ec8a64912a2e028dd62a7ddb83b48d7c7e07bd82beaaf
-    // 0xe19a98905d32d5b3fd9ec8a64912a2e028dd62a7ddb83b48d7c7e07bd82beaaf
-
-
+    // "0x8672be2c3c90d8bf0f59d6cee7b7cf33a4914befb4bee658f11f9b9923f58582"
     // mintPresale function
     const mintSale = async () => {
         if (contract) {
-            try{
+            try {
                 return await contract.methods.mint_nft(proof).send({
                     from: currentAccount,
                     value: price,
@@ -134,13 +135,102 @@ const Mint = () => {
             }
         }
     };
+    // function to end sale from owner
+    const endSale = async () => {
+        if (contract) {
+            try {
+                return await contract.methods.endSale().send({
+                    from: owner,
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
+    // Function to send Royalties
+    const sendRoyalties = async () => {
+        if (contract) {
+            try {
+                console.log('sendRoyalties');
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
 
     return (
         <>
-            {saleStatus == 1 ? (
-                <MintNFT price={price} mintSale={mintSale} />
+            {!state.artifact ? (
+                <Loader />
+            ) : !state.contract ? (
+                <AlertWrongNetwork />
+            ) : // check if current account is owner
+            isOwner ? (
+                <AdminInterface
+                    saleStatus={saleStatus}
+                    endSale={endSale}
+                    sendRoyalties={sendRoyalties}
+                />
+            ) : saleStatus == 1 ? (
+                <>
+                    <MintNFT
+                        price={price}
+                        mintSale={mintSale}
+                        balanceOfAccount={balanceOfAccount}
+                        maxPerAddress={maxPerAddress}
+                        totalSupply={totalSupply}
+                        success={sucessMint}
+                    />
+                </>
+            ) : saleStatus == 2 ? (
+                <>
+                    <h1
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            textTransform: 'uppercase',
+                        }}
+                    >
+                        Sale are already end
+                    </h1>
+                    {!isOwner && (
+                        <>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    gap: '2rem',
+                                }}
+                            >
+                                <Link href="/collection">
+                                    <Button btnName="Discover my collection" />
+                                </Link>
+                                <Link
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                    }}
+                                    href="https://testnets.opensea.io/"
+                                >
+                                    <Button btnName="See on OpenSea" />
+                                </Link>
+                            </div>
+                        </>
+                    )}
+                </>
             ) : (
-                <h1>Sale not started</h1>
+                <>
+                    <h1
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            textTransform: 'uppercase',
+                        }}
+                    >
+                        Sale are not started yet
+                    </h1>
+                </>
             )}
         </>
     );

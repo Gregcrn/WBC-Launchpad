@@ -2,20 +2,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "@openzeppelin/contracts/utils/Strings.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
+import '@openzeppelin/contracts/utils/Strings.sol';
+import '@openzeppelin/contracts/utils/Counters.sol';
+import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
+import '@openzeppelin/contracts/finance/PaymentSplitter.sol';
+import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
+import '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 
 contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
     // Counter for tokenIds
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    // Total Supply
-    uint256 public TOTAL_SUPPLY = 170;
     // Max Supply
     uint256 public constant MAX_SUPPLY = 170;
     // Max Nfts per address
@@ -23,17 +21,16 @@ contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
     // Price
     uint256 public constant PRICE = 1 ether;
     // Extension of the base URI
-    string private extension = ".json";
+    string private extension = '.json';
     // boolean to know if it's revealed
     bool private _isRevealed = false;
     // Members of the team to receive the payments
     address[] private _teamMembers = [
         0xA65342E5a81Cab20595A8e4F73758350056Ac5C1,
-        0x6D80Ab5FBbb46421B8CA1ee35A4b1150BeB22E96,
-        0xf3D882E3eD580da0aD0EaA6C94dD26e64B7c4069
+        0x6D80Ab5FBbb46421B8CA1ee35A4b1150BeB22E96
     ];
     // Shares of the team members
-    uint256[] private _teamShares = [50, 30, 20];
+    uint256[] private _teamShares = [50, 50];
     // mapping address bool to check if address has minted
     mapping(address => bool) private _hasMinted;
     // mapping of all the NFTs by address
@@ -65,7 +62,7 @@ contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
      * @dev Contrusctor of the contract with the name, symbol and the team members and shares with Merkle Root
      */
     constructor(bytes32 _MerkleRoot)
-        ERC721("WBC NFT", "WBC")
+        ERC721('WBC NFT', 'WBC')
         PaymentSplitter(_teamMembers, _teamShares)
     {
         merkleRoot = _MerkleRoot;
@@ -78,7 +75,7 @@ contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
     modifier notContract() {
         require(
             msg.sender == tx.origin,
-            "Sorry, contracts are not allowed to interact with this contract"
+            'Sorry, contracts are not allowed to interact with this contract'
         );
         _;
     }
@@ -123,17 +120,20 @@ contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
         notContract
     {
         // Check if the max supply has been reached
-        require(_tokenIds.current() < MAX_SUPPLY, "Max supply reached");
-        // Check if the max NFTs per address has been reached
-        require(!_hasMinted[msg.sender], "Max NFTs per address reached");
+        require(_tokenIds.current() < MAX_SUPPLY, 'Max supply reached');
+        // check if balance of msg.sender is less than 2
+        require(
+            balanceOf(msg.sender) < MAX_NFTS_PER_ADDRESS,
+            'You have already minted 2 NFTs'
+        );
         // Check if the msg.sender send enough ETH to buy the NFT
-        require(msg.value >= PRICE, "Not enough ETH sent");
+        require(msg.value >= PRICE, 'Not enough ETH sent');
         // Check if the sale has started
-        require(saleState == SaleState.Started, "Sale has not started yet");
+        require(saleState == SaleState.Started, 'Sale has not started yet');
         // Require the msg.sender to be whitelisted
         require(
             isWhiteListed(msg.sender, _proof),
-            "You are not whitelisted to buy this NFT"
+            'You are not whitelisted to buy this NFT'
         );
         // Mint the NFT
         _safeMint(msg.sender, _tokenIds.current());
@@ -141,8 +141,6 @@ contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
         _tokenIds.increment();
         // Set the address to true
         _hasMinted[msg.sender] = true;
-        // Update TOTAL_SUPPLY after minting
-        TOTAL_SUPPLY = TOTAL_SUPPLY - 1;
         // Event to emit when the NFT is minted
         emit NFTMinted(msg.sender, _tokenIds.current());
     }
@@ -160,14 +158,14 @@ contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
             return
                 string(
                     abi.encodePacked(
-                        "ipfs://QmdgFwpHA8SQK4mH6cwW4TvBhiZqQ2RNbmFrYDUg9pqrMj/hidden"
+                        'ipfs://QmdgFwpHA8SQK4mH6cwW4TvBhiZqQ2RNbmFrYDUg9pqrMj/hidden'
                     )
                 );
         } else {
             return
                 string(
                     abi.encodePacked(
-                        "bafybeidtu2h3g6ynef6nkjieo6rtybdzga4sz2c6uh64en6m45vxzpgeyq",
+                        'bafybeidtu2h3g6ynef6nkjieo6rtybdzga4sz2c6uh64en6m45vxzpgeyq',
                         Strings.toString(tokenId),
                         extension
                     )
