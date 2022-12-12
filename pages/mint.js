@@ -121,7 +121,6 @@ const Mint = () => {
     const merkleTree = new MerkleTree(leaves, keccak256, { sort: true });
     const leaf = keccak256(currentAccount);
     const proof = merkleTree.getHexProof(leaf);
-    // "0x8672be2c3c90d8bf0f59d6cee7b7cf33a4914befb4bee658f11f9b9923f58582"
     // mintPresale function
     const mintSale = async () => {
         if (contract) {
@@ -149,10 +148,15 @@ const Mint = () => {
     };
 
     // Function to send Royalties
-    const sendRoyalties = async () => {
+    const sendRoyalties = async (address) => {
         if (contract) {
             try {
-                console.log('sendRoyalties');
+                console.log('sendRoyalties to : ' + address);
+                return await contract.methods.release(address).send({
+                    from: owner,
+                });
+
+                // 0x6D80Ab5FBbb46421B8CA1ee35A4b1150BeB22E96
             } catch (error) {
                 console.log(error);
             }

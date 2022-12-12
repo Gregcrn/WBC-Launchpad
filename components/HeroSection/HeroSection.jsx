@@ -10,23 +10,43 @@ import { SiEthereum } from 'react-icons/si';
 import { shortenAddress } from '../../utils/shortenAddress';
 import Link from 'next/link';
 
+// Merkle
+import { MerkleTree } from 'merkletreejs';
+import keccak256 from 'keccak256';
+import merkle from '../../merkle/merkle.json';
+
 const HeroSection = ({ currentAccount }) => {
+    let whitelist = [];
+    merkle.map((token) => {
+        whitelist.push(token.address);
+    });
+
+    const leaves = whitelist.map((address) => keccak256(address));
+    const merkleTree = new MerkleTree(leaves, keccak256, { sort: true });
+    const leaf = keccak256(currentAccount);
+    const proof = merkleTree.getHexProof(leaf);
+
+    const isWhitelisted = merkleTree.verify(proof, leaf, merkleTree.getRoot());
+    console.log('isWhitelisted', isWhitelisted);
+
     const titleData = 'WBC Launchpad';
     const router = useRouter();
     return (
         <div className={Style.heroSection}>
             <div className={Style.heroSection_box}>
                 <div className={Style.heroSection_box_left}>
-                    <h1 style={{ margin: 0 }}>{titleData}🚀</h1>
+                    <h1 style={{ margin: 0 }}>{titleData}🍷</h1>
                     <p>
                         NFT collections, Vineyard tokenization, Metaverse drops,
                         Play to earn, oenotourism, tokenization projects, DAO /
                         ICO, IPO...
                     </p>
-                    <Button
-                        btnName="Register on the WhiteList"
-                        handleClick={() => router.push('/mint')}
-                    />
+                    {isWhitelisted && (
+                        <Button
+                            btnName="Mint your NFT"
+                            handleClick={() => router.push('/mint')}
+                        />
+                    )}
                     <div className={Style.panel}>
                         <div className={Style.cardFront}>
                             <SiEthereum className={Style.cardIcon} />
