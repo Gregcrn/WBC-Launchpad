@@ -1,7 +1,7 @@
 // import WBC_NFT from the compiled artifacts
 const WBC_NFT = artifacts.require('WBC_NFT');
 // import MerkleTree from merkletreejs
-const {MerkleTree} = require('merkletreejs');
+const { MerkleTree } = require('merkletreejs');
 // import keccak256 from keccak256
 const keccak256 = require('keccak256');
 // import adress from whitelist/adress.json
@@ -9,7 +9,7 @@ const addresses = require('../whitelist/address.json');
 
 let whitelist = [];
 addresses.map((address) => {
-    whitelist.push(address.address)
+    whitelist.push(address.address);
 });
 
 const leaves = whitelist.map((address) => keccak256(address));
@@ -18,8 +18,7 @@ const merkleRoot = merkleTree.getHexRoot();
 
 console.log('merkleRoot', merkleRoot);
 
-
-module.exports = function (deployer) {
-    deployer.deploy(WBC_NFT, merkleRoot);
+module.exports = async function (deployer) {
+    await deployer.deploy(WBC_NFT, merkleRoot);
     console.log('WBC_NFT deployed to:', WBC_NFT.address);
 };

@@ -19,7 +19,7 @@ contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
     // Max Nfts per address
     uint256 public constant MAX_NFTS_PER_ADDRESS = 2;
     // Price
-    uint256 public constant PRICE = 1 ether;
+    uint256 public constant PRICE = 0.001 ether;
     // Extension of the base URI
     string private extension = '.json';
     // boolean to know if it's revealed
@@ -158,14 +158,14 @@ contract WBC_NFT is ERC721, Ownable, PaymentSplitter, ReentrancyGuard {
             return
                 string(
                     abi.encodePacked(
-                        'ipfs://QmdgFwpHA8SQK4mH6cwW4TvBhiZqQ2RNbmFrYDUg9pqrMj/hidden'
+                        'https://gateway.pinata.cloud/ipfs/QmdgFwpHA8SQK4mH6cwW4TvBhiZqQ2RNbmFrYDUg9pqrMj/hidden.json'
                     )
                 );
         } else {
             return
                 string(
                     abi.encodePacked(
-                        'bafybeidtu2h3g6ynef6nkjieo6rtybdzga4sz2c6uh64en6m45vxzpgeyq',
+                        'https://nftstorage.link/ipfs/bafybeibdnfujmacmlobxjuoamftqepmz4aiyplyuit6z2c6pqg5wocpebq/',
                         Strings.toString(tokenId),
                         extension
                     )
