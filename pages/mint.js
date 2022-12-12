@@ -109,7 +109,14 @@ const Mint = () => {
         getPrice();
         getBalanceOfAccount();
         getTotalSupply();
-    }, [contract, accounts, owner, currentAccount]);
+    }, [
+        contract,
+        accounts,
+        owner,
+        currentAccount,
+        balanceOfAccount,
+        setBalanceOfAccount,
+    ]);
 
     // Merkle
     let whitelist = [];
@@ -121,19 +128,37 @@ const Mint = () => {
     const merkleTree = new MerkleTree(leaves, keccak256, { sort: true });
     const leaf = keccak256(currentAccount);
     const proof = merkleTree.getHexProof(leaf);
+
+    const isWhitelisted = merkleTree.verify(proof, leaf, merkleTree.getRoot());
     // mintPresale function
     const mintSale = async () => {
         if (contract) {
             try {
-                return await contract.methods.mint_nft(proof).send({
+                const tx = await contract.methods.mint_nft(proof).send({
                     from: currentAccount,
                     value: price,
+                });
+                setBalanceOfAccount(balanceOfAccount + 1);
+                return tx;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+    // function to start sale from owner
+    const startSale = async () => {
+        if (contract) {
+            try {
+                console.log('startSale');
+                return await contract.methods.startSale().send({
+                    from: owner,
                 });
             } catch (error) {
                 console.log(error);
             }
         }
     };
+
     // function to end sale from owner
     const endSale = async () => {
         if (contract) {
@@ -155,8 +180,6 @@ const Mint = () => {
                 return await contract.methods.release(address).send({
                     from: owner,
                 });
-
-                // 0x6D80Ab5FBbb46421B8CA1ee35A4b1150BeB22E96
             } catch (error) {
                 console.log(error);
             }
@@ -173,6 +196,7 @@ const Mint = () => {
             isOwner ? (
                 <AdminInterface
                     saleStatus={saleStatus}
+                    startSale={startSale}
                     endSale={endSale}
                     sendRoyalties={sendRoyalties}
                 />
@@ -198,7 +222,7 @@ const Mint = () => {
                     >
                         Sale are already end
                     </h1>
-                    {!isOwner && (
+                    {!isOwner && isWhitelisted && (
                         <>
                             <div
                                 style={{
@@ -215,7 +239,7 @@ const Mint = () => {
                                         display: 'flex',
                                         justifyContent: 'center',
                                     }}
-                                    href="https://testnets.opensea.io/"
+                                    href="https://testnets.opensea.io/account"
                                 >
                                     <Button btnName="See on OpenSea" />
                                 </Link>
