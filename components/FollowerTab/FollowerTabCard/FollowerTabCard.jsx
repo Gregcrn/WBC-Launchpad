@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { MdVerified } from 'react-icons/md';
-import { TiTick } from 'react-icons/ti';
 
 //INTERNAL IMPORT
 import Style from './FollowerTabCard.module.css';
@@ -46,7 +45,7 @@ const FollowerTabCard = ({ i, el }) => {
                         alt="profile picture"
                         width={50}
                         height={50}
-                        src={el.vineyard || images.user1}
+                        src={images.user1}
                     />
                 </div>
 
@@ -60,19 +59,6 @@ const FollowerTabCard = ({ i, el }) => {
                             </span>
                         </h4>
                         <p>{el.total || 0} ETH</p>
-                    </div>
-
-                    <div className={Style.FollowerTabCard_box_info_following}>
-                        {following ? (
-                            <Link href={`/#`}>
-                                Follow{''}{' '}
-                                <span>
-                                    <TiTick />
-                                </span>
-                            </Link>
-                        ) : (
-                            <Link onClick={() => followMe()}>Following</Link>
-                        )}
                     </div>
                 </div>
             </div>

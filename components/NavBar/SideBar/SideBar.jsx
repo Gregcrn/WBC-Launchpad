@@ -125,19 +125,19 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
                     & write your own stories and share them
                 </p>
                 <div className={Style.sideBar_social}>
-                    <Link href="#">
+                    <Link href="/">
                         <TiSocialFacebook />
                     </Link>
-                    <Link href="#">
+                    <Link href="/">
                         <TiSocialLinkedin />
                     </Link>
-                    <Link href="#">
+                    <Link href="/">
                         <TiSocialTwitter />
                     </Link>
-                    <Link href="#">
+                    <Link href="/">
                         <TiSocialYoutube />
                     </Link>
-                    <Link href="#">
+                    <Link href="/">
                         <TiSocialInstagram />
                     </Link>
                 </div>
@@ -157,9 +157,7 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
                         <div className={Style.sideBar_discover}>
                             {discover.map((el, i) => (
                                 <p key={i + 1}>
-                                    <Link href={{ pathname: `${el.link}` }}>
-                                        {el.name}
-                                    </Link>
+                                    <Link href="/">{el.name}</Link>
                                 </p>
                             ))}
                         </div>
